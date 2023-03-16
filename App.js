@@ -4,6 +4,8 @@ import { StyleSheet, Text, View } from "react-native";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 
+import MealsNavigator from "./navigation/MealsNavigator";
+
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
@@ -25,13 +27,7 @@ export default function App() {
     SplashScreen.hideAsync();
   }
 
-  return (
-    <View style={styles.container}>
-      <Text style={{ fontFamily: "open-sans-bold" }}>
-        Open up App.js to start working on your app!
-      </Text>
-    </View>
-  );
+  return <MealsNavigator />;
 }
 
 const styles = StyleSheet.create({
