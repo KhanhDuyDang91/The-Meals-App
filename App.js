@@ -9,6 +9,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import CategoriesScreen from "./screens/CategoriesScreen";
 import CategoryMealsScreen from "./screens/CategoryMealsScreen";
 import MealDetailScreen from "./screens/MealDetailScreen";
+import Colors from "./constants/Colors";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -36,7 +37,21 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={CategoriesScreen} />
+        <Stack.Screen
+          name="Home"
+          component={CategoriesScreen}
+          options={{
+            title: "Categories Meal",
+            headerStyle: {
+              backgroundColor: Colors.accentColor,
+            },
+            headerTintColor: Colors.textColor,
+            headerTitleAlign: "center",
+            headerTitleStyle: {
+              fontFamily: "open-sans-bold",
+            },
+          }}
+        />
         <Stack.Screen name="Meal" component={CategoryMealsScreen} />
         <Stack.Screen name="MealDetails" component={MealDetailScreen} />
       </Stack.Navigator>
