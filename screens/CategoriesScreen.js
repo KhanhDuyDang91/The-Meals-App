@@ -18,9 +18,8 @@ const CategoriesScreen = (props) => {
         style={styles.gridItem}
         onPress={() => {
           props.navigation.navigate("Meal", {
-            categoryId: itemData.item.title,
+            categoryId: itemData.item,
           });
-          console.log(itemData.item.id);
         }}
       >
         <View>

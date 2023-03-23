@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useEffect } from "react";
 import { StyleSheet, View, Text, Button } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
@@ -8,7 +8,12 @@ const CategoryMealsScreen = ({ route, props }) => {
   const navigation = useNavigation();
 
   const catId = route.params;
-  console.log(JSON.stringify(catId.categoryId));
+
+  useEffect(() => {
+    navigation.setOptions({
+      title: catId.categoryId.title,
+    });
+  }, []);
 
   /* const catId = navigation.getId(({ categoryId }) => categoryId.item.id); */
   /* const selectedCategory = CATEGORIES.find((cat) => cat.id === catId); */
@@ -16,13 +21,8 @@ const CategoryMealsScreen = ({ route, props }) => {
   return (
     <View style={styles.screen}>
       <Text>This is CategoryMealsScreen</Text>
-      {/* {console.log(JSON.stringify(catId.id))} */}
-      <Text>{catId.categoryId}</Text>
-
-      <Button
-        title="Details"
-        onPress={() => props.navigation.navigate("Home")}
-      />
+      <Text>{catId.categoryId.title}</Text>
+      <Button title="Back" onPress={() => navigation.navigate("Home")} />
     </View>
   );
 };

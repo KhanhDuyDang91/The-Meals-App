@@ -5,12 +5,14 @@ import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { enableScreens } from "react-native-screens";
 
 import CategoriesScreen from "./screens/CategoriesScreen";
 import CategoryMealsScreen from "./screens/CategoryMealsScreen";
 import MealDetailScreen from "./screens/MealDetailScreen";
 import Colors from "./constants/Colors";
 
+enableScreens();
 SplashScreen.preventAutoHideAsync();
 
 const Stack = createNativeStackNavigator();
@@ -37,11 +39,8 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen
-          name="Home"
-          component={CategoriesScreen}
-          options={{
-            title: "Categories Meal",
+        <Stack.Group
+          screenOptions={{
             headerStyle: {
               backgroundColor: Colors.accentColor,
             },
@@ -51,9 +50,17 @@ export default function App() {
               fontFamily: "open-sans-bold",
             },
           }}
-        />
-        <Stack.Screen name="Meal" component={CategoryMealsScreen} />
-        <Stack.Screen name="MealDetails" component={MealDetailScreen} />
+        >
+          <Stack.Screen
+            name="Home"
+            component={CategoriesScreen}
+            options={{
+              title: "Categories Meal",
+            }}
+          />
+          <Stack.Screen name="Meal" component={CategoryMealsScreen} />
+          <Stack.Screen name="MealDetails" component={MealDetailScreen} />
+        </Stack.Group>
       </Stack.Navigator>
     </NavigationContainer>
   );
