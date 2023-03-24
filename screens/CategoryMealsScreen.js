@@ -15,9 +15,6 @@ const CategoryMealsScreen = ({ route, props }) => {
     });
   }, []);
 
-  /* const catId = navigation.getId(({ categoryId }) => categoryId.item.id); */
-  /* const selectedCategory = CATEGORIES.find((cat) => cat.id === catId); */
-
   return (
     <View style={styles.screen}>
       <Text>This is CategoryMealsScreen</Text>
