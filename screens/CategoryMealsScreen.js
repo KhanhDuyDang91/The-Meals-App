@@ -1,13 +1,17 @@
 import { React, useEffect } from "react";
-import { StyleSheet, View, Text, Button } from "react-native";
+import { StyleSheet, View, Text, Button, FlatList } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-import { CATEGORIES } from "../data/dummy-data";
+import { CATEGORIES, MEALS } from "../data/dummy-data";
 
 const CategoryMealsScreen = ({ route, props }) => {
   const navigation = useNavigation();
 
   const catId = route.params;
+
+  const displayedMeals = MEALS.filter(
+    (meal) => meal.categoryIds.indexOf(catId.categoryId.id) >= 0
+  );
 
   useEffect(() => {
     navigation.setOptions({
@@ -15,11 +19,21 @@ const CategoryMealsScreen = ({ route, props }) => {
     });
   }, []);
 
+  const renderMealItem = (itemData) => {
+    return (
+      <View>
+        <Text>{itemData.item.title}</Text>
+      </View>
+    );
+  };
+
   return (
     <View style={styles.screen}>
-      <Text>This is CategoryMealsScreen</Text>
-      <Text>{catId.categoryId.title}</Text>
-      <Button title="Back" onPress={() => navigation.navigate("Home")} />
+      <FlatList
+        data={displayedMeals}
+        keyExtractor={(item, index) => item.id}
+        renderItem={renderMealItem}
+      />
     </View>
   );
 };

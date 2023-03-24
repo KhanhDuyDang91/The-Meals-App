@@ -20,7 +20,6 @@ const CategoryGridTile = (props) => {
         <View
           style={{ ...styles.container, ...{ backgroundColor: props.color } }}
         >
-          {console.log(props.title)}
           <Text style={styles.title} numberOfLines={2}>
             {props.title}
           </Text>
