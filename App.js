@@ -42,7 +42,7 @@ export default function App() {
         <Stack.Group
           screenOptions={{
             headerStyle: {
-              backgroundColor: Colors.accentColor,
+              backgroundColor: Colors.thirdColor,
             },
             headerTintColor: Colors.textColor,
             headerTitleAlign: "center",
