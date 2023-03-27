@@ -11,6 +11,7 @@ import CategoriesScreen from "./screens/CategoriesScreen";
 import CategoryMealsScreen from "./screens/CategoryMealsScreen";
 import MealDetailScreen from "./screens/MealDetailScreen";
 import Colors from "./constants/Colors";
+import HeaderTitleCpn from "./components/HeaderTitle";
 
 enableScreens();
 SplashScreen.preventAutoHideAsync();
@@ -59,7 +60,13 @@ export default function App() {
             }}
           />
           <Stack.Screen name="Meal" component={CategoryMealsScreen} />
-          <Stack.Screen name="MealDetails" component={MealDetailScreen} />
+          <Stack.Screen
+            name="MealDetails"
+            component={MealDetailScreen}
+            options={{
+              headerBackVisible: true,
+            }}
+          />
         </Stack.Group>
       </Stack.Navigator>
     </NavigationContainer>

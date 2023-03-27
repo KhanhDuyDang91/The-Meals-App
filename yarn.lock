@@ -1802,7 +1802,7 @@
     "hoist-non-react-statics" "^3.3.2"
     "react-native-safe-area-view" "^0.14.9"
 
-"@react-navigation/native@^6.0.0", "@react-navigation/native@^6.1.6":
+"@react-navigation/native@^6.0.0", "@react-navigation/native@^6.1.6", "@react-navigation/native@>=5":
   "integrity" "sha512-14PmSy4JR8HHEk04QkxQ0ZLuqtiQfb4BV9kkMXD2/jI4TZ+yc43OnO6fQ2o9wm+Bq8pY3DxyerC2AjNUz+oH7Q=="
   "resolved" "https://registry.npmjs.org/@react-navigation/native/-/native-6.1.6.tgz"
   "version" "6.1.6"
@@ -3912,7 +3912,7 @@
     "default-gateway" "^4.2.0"
     "ipaddr.js" "^1.9.0"
 
-"invariant@*", "invariant@^2.2.4":
+"invariant@*", "invariant@^2.2.4", "invariant@>=2":
   "integrity" "sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA=="
   "resolved" "https://registry.npmjs.org/invariant/-/invariant-2.2.4.tgz"
   "version" "2.2.4"
@@ -5931,7 +5931,7 @@
   "resolved" "https://registry.npmjs.org/react-native-tab-view/-/react-native-tab-view-2.16.0.tgz"
   "version" "2.16.0"
 
-"react-native@*", "react-native@>=0.42.0", "react-native@0.71.4":
+"react-native@*", "react-native@>=0.42.0", "react-native@>=0.65.0", "react-native@0.71.4":
   "integrity" "sha512-3hSYqvWrOdKhpV3HpEKp1/CkWx8Sr/N/miCrmUIAsVTSJUR7JW0VvIsrV9urDhUj/s6v2WF4n7qIEEJsmTCrPw=="
   "resolved" "https://registry.npmjs.org/react-native/-/react-native-0.71.4.tgz"
   "version" "0.71.4"
@@ -5975,6 +5975,13 @@
   "integrity" "sha512-AZgluZ8txCG+MrITF+VuHYAnnLaUQw/HvxHKWrAngy/CbmyEIgXEowvShCKMZDMa7PUtKY5+xuwgQtniGgGKsg=="
   "resolved" "https://registry.npmjs.org/react-navigation-drawer/-/react-navigation-drawer-2.7.2.tgz"
   "version" "2.7.2"
+
+"react-navigation-header-buttons@^10.0.0":
+  "integrity" "sha512-45jLyyMB/2uMmDm+SWcUrDJLXxiVeaVtbHf1cgmzt4eS/C1AxOyG1pimIFxQK8EoDbZDV24mqAX13/UCwqhWpw=="
+  "resolved" "https://registry.npmjs.org/react-navigation-header-buttons/-/react-navigation-header-buttons-10.0.0.tgz"
+  "version" "10.0.0"
+  dependencies:
+    "invariant" ">=2"
 
 "react-navigation-tabs@^2.11.2":
   "integrity" "sha512-8w/fiX+gGIyxYWBUT6Fg/26DTggjzK4lPfnLTP1pR7DUfYGLf2/f/aJWqiIJt6U4k/19tzpr4sXQqG7fX6PLjg=="

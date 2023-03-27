@@ -1,10 +1,25 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { useEffect } from "react";
 
-const MealDetailScreen = (props) => {
+import HeaderTitleCpn from "../components/HeaderTitle";
+
+const MealDetailScreen = ({ props, route }) => {
+  const navigation = useNavigation();
+  const mealParam = route.params;
+  const mealItem = mealParam.mealItem;
+
+  useEffect(() => {
+    navigation.setOptions({
+      title: mealItem.title,
+      headerTitle: () => <HeaderTitleCpn title={mealItem.title} />,
+    });
+  }, []);
+
   return (
     <View style={styles.screen}>
-      <Text>This is MealDetailScreen</Text>
+      <Text>{mealItem.ingredients}</Text>
     </View>
   );
 };
