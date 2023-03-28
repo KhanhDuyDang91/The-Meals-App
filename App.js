@@ -6,10 +6,13 @@ import * as SplashScreen from "expo-splash-screen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { enableScreens } from "react-native-screens";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 
 import CategoriesScreen from "./screens/CategoriesScreen";
 import CategoryMealsScreen from "./screens/CategoryMealsScreen";
 import MealDetailScreen from "./screens/MealDetailScreen";
+import FavoritesScreens from "./screens/FavoritesScreen";
 import Colors from "./constants/Colors";
 import HeaderTitleCpn from "./components/HeaderTitle";
 
@@ -37,8 +40,10 @@ export default function App() {
     SplashScreen.hideAsync();
   }
 
-  return (
-    <NavigationContainer>
+  const Tab = createBottomTabNavigator();
+
+  const MealNavigator = () => {
+    return (
       <Stack.Navigator initialRouteName="Home">
         <Stack.Group
           screenOptions={{
@@ -53,20 +58,74 @@ export default function App() {
           }}
         >
           <Stack.Screen
-            name="Home"
+            name="Categories Meal"
             component={CategoriesScreen}
             options={{
               title: "Categories Meal",
             }}
-          />
+          ></Stack.Screen>
           <Stack.Screen name="Meal" component={CategoryMealsScreen} />
-          <Stack.Screen
-            name="MealDetails"
-            component={MealDetailScreen}
-            options={{}}
-          />
+          <Stack.Screen name="MealDetails" component={MealDetailScreen} />
         </Stack.Group>
       </Stack.Navigator>
+    );
+  };
+
+  return (
+    <NavigationContainer>
+      <Tab.Navigator
+        screenOptions={{
+          tabBarActiveTintColor: Colors.thirdColor,
+          tabBarActiveBackgroundColor: Colors.primaryColor,
+          tabBarLabelStyle: {
+            fontFamily: "open-sans-bold",
+            fontSize: 13,
+            paddingBottom: 5,
+          },
+        }}
+      >
+        <Tab.Screen
+          name="Home"
+          component={MealNavigator}
+          options={{
+            headerShown: false,
+
+            tabBarIcon: (tabInfo) => {
+              return (
+                <MaterialCommunityIcons
+                  name="home"
+                  size={25}
+                  color={Colors.thirdColor}
+                />
+              );
+            },
+          }}
+        />
+        <Tab.Screen
+          name="Favorite"
+          component={FavoritesScreens}
+          options={{
+            tabBarIcon: (tabInfo) => {
+              return (
+                <MaterialCommunityIcons
+                  name="star"
+                  size={25}
+                  color={Colors.thirdColor}
+                />
+              );
+            },
+            headerStyle: {
+              backgroundColor: Colors.thirdColor,
+            },
+            headerTintColor: Colors.textColor,
+            headerTitleAlign: "center",
+            headerTitleStyle: {
+              fontFamily: "open-sans-bold",
+            },
+            headerTitle: "Favorite Meals",
+          }}
+        />
+      </Tab.Navigator>
     </NavigationContainer>
   );
 }
