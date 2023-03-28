@@ -63,9 +63,7 @@ export default function App() {
           <Stack.Screen
             name="MealDetails"
             component={MealDetailScreen}
-            options={{
-              headerBackVisible: true,
-            }}
+            options={{}}
           />
         </Stack.Group>
       </Stack.Navigator>

@@ -4,19 +4,20 @@ import { useState } from "react";
 
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import HeaderButton from "../components/HeaderButton";
+import Colors from "../constants/Colors";
 
 const HeaderTitleCpn = (props) => {
   const [stateFav, setStateFav] = useState(false);
 
   return (
     <View style={styles.container}>
-      <Text numberOfLines={1} style={styles.title}>
+      <Text numberOfLines={2} style={styles.title}>
         {props.title}
       </Text>
       <HeaderButtons HeaderButtonComponent={HeaderButton}>
         <Item
           title="Favorite"
-          iconName={stateFav === false ? "heart-outline" : "heart"}
+          iconName={stateFav === false ? "heart-plus-outline" : "heart-remove"}
           onPress={() => {
             setStateFav(!stateFav);
             stateFav === false
@@ -33,21 +34,25 @@ const HeaderTitleCpn = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "yellow",
     width: "100%",
-    direction: "ltr",
     flexDirection: "row",
+    justifyContent: "space-evenly",
+    overflow: "hidden",
+    alignItems: "center",
   },
   title: {
-    backgroundColor: "gray",
     fontFamily: "open-sans-bold",
     fontSize: 20,
-    paddingHorizontal: 10,
+    paddingHorizontal: 20,
+    textAlign: "center",
+    width: "60%",
   },
   headerBtn: {
-    marginRight: 0,
-    backgroundColor: "red",
-    left: 10,
+    marginRight: 60,
+    height: "80%",
+    alignItems: "center",
+    backgroundColor: Colors.primaryColor,
+    borderRadius: 25,
   },
 });
 
