@@ -71,6 +71,27 @@ export default function App() {
     );
   };
 
+  const FavNavigator = () => {
+    return (
+      <Stack.Navigator
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: Colors.thirdColor,
+          },
+          headerTintColor: Colors.textColor,
+          headerTitleAlign: "center",
+          headerTitleStyle: {
+            fontFamily: "open-sans-bold",
+          },
+          headerTitle: "Favorite Meals",
+        }}
+      >
+        <Stack.Screen name="Fav" component={FavoritesScreens} />
+        <Stack.Screen name="MealDetails" component={MealDetailScreen} />
+      </Stack.Navigator>
+    );
+  };
+
   return (
     <NavigationContainer>
       <Tab.Navigator
@@ -99,12 +120,14 @@ export default function App() {
                 />
               );
             },
+            tabBarBadge: "hihi",
           }}
         />
         <Tab.Screen
           name="Favorite"
-          component={FavoritesScreens}
+          component={FavNavigator}
           options={{
+            headerShown: false,
             tabBarIcon: (tabInfo) => {
               return (
                 <MaterialCommunityIcons
@@ -114,15 +137,6 @@ export default function App() {
                 />
               );
             },
-            headerStyle: {
-              backgroundColor: Colors.thirdColor,
-            },
-            headerTintColor: Colors.textColor,
-            headerTitleAlign: "center",
-            headerTitleStyle: {
-              fontFamily: "open-sans-bold",
-            },
-            headerTitle: "Favorite Meals",
           }}
         />
       </Tab.Navigator>
