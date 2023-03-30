@@ -83,7 +83,7 @@ export default function App() {
           headerTitleStyle: {
             fontFamily: "open-sans-bold",
           },
-          headerTitle: "Favorite Meals",
+          headerTitle: "Your Favorite Meals",
         }}
       >
         <Stack.Screen name="Fav" component={FavoritesScreens} />
