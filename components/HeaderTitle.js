@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import HeaderButton from "../components/HeaderButton";
@@ -8,6 +9,7 @@ import Colors from "../constants/Colors";
 
 const HeaderTitleCpn = (props) => {
   const [stateFav, setStateFav] = useState(false);
+  const navigation = useNavigation();
 
   return (
     <View style={styles.container}>

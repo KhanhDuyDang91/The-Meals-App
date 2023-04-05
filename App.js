@@ -1,14 +1,16 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { enableScreens } from "react-native-screens";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { createDrawerNavigator } from "@react-navigation/drawer";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
+import { DrawerActions } from "@react-navigation/native";
 
 import CategoriesScreen from "./screens/CategoriesScreen";
 import CategoryMealsScreen from "./screens/CategoryMealsScreen";
@@ -17,6 +19,8 @@ import FavoritesScreens from "./screens/FavoritesScreen";
 import Colors from "./constants/Colors";
 import HeaderTitleCpn from "./components/HeaderTitle";
 import FiltersScreen from "./screens/FiltersScreen";
+import HeaderButton from "./components/HeaderButton";
+import MenuBtn from "./components/MenuBtn";
 
 enableScreens();
 SplashScreen.preventAutoHideAsync();
@@ -42,41 +46,8 @@ export default function App() {
     SplashScreen.hideAsync();
   }
 
-  const Draw = createDrawerNavigator();
-
-  const DrawNavigator = () => {
-    return (
-      <Draw.Navigator>
-        <Draw.Screen name="Filter" component={FilterNavigator} />
-        <Draw.Screen name="Favorite" component={FavNavigator} />
-      </Draw.Navigator>
-    );
-  };
-
-  const FilterNavigator = () => {
-    return (
-      <Stack.Navigator
-        screenOptions={{
-          headerStyle: {
-            backgroundColor: Colors.thirdColor,
-          },
-          headerTintColor: Colors.textColor,
-          headerTitleAlign: "center",
-          headerTitleStyle: {
-            fontFamily: "open-sans-bold",
-          },
-          headerTitle: "Your Favorite Meals",
-        }}
-      >
-        <Stack.Screen name="Filter" component={FiltersScreen} />
-        <Stack.Screen name="MealDetails" component={MealDetailScreen} />
-      </Stack.Navigator>
-    );
-  };
-
-  const Tab = createBottomTabNavigator();
-
-  const MealNavigator = () => {
+  const MealStackNavigator = () => {
+    const navigation = useNavigation();
     return (
       <Stack.Navigator initialRouteName="Home">
         <Stack.Group
@@ -95,7 +66,10 @@ export default function App() {
             name="Categories Meal"
             component={CategoriesScreen}
             options={{
-              title: "Categories Meal",
+              headerBackVisible: false,
+              headerLeft: () => {
+                return <MenuBtn />;
+              },
             }}
           ></Stack.Screen>
           <Stack.Screen name="Meal" component={CategoryMealsScreen} />
@@ -105,7 +79,7 @@ export default function App() {
     );
   };
 
-  const FavNavigator = () => {
+  const FavStackNavigator = () => {
     return (
       <Stack.Navigator
         screenOptions={{
@@ -117,17 +91,60 @@ export default function App() {
           headerTitleStyle: {
             fontFamily: "open-sans-bold",
           },
-          headerTitle: "Your Favorite Meals",
+          headerTitle: "My Favorite List",
         }}
       >
-        <Stack.Screen name="Fav" component={FavoritesScreens} />
+        <Stack.Screen
+          name="Fav"
+          component={FavoritesScreens}
+          options={{
+            headerBackVisible: false,
+            headerLeft: () => {
+              return <MenuBtn />;
+            },
+          }}
+        />
         <Stack.Screen name="MealDetails" component={MealDetailScreen} />
       </Stack.Navigator>
     );
   };
 
-  return (
-    <NavigationContainer>
+  const FilterStackNavigator = () => {
+    const props = useNavigation();
+
+    return (
+      <Stack.Navigator
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: Colors.thirdColor,
+          },
+          headerTintColor: Colors.textColor,
+          headerTitleAlign: "center",
+          headerTitleStyle: {
+            fontFamily: "open-sans-bold",
+          },
+          headerTitle: "Your Filter",
+        }}
+      >
+        <Stack.Screen
+          name="FiltersScreen"
+          component={FiltersScreen}
+          options={{
+            headerBackVisible: false,
+            headerLeft: () => {
+              return <MenuBtn />;
+            },
+          }}
+        />
+        <Stack.Screen name="MealDetails" component={MealDetailScreen} />
+      </Stack.Navigator>
+    );
+  };
+
+  const Tab = createBottomTabNavigator();
+
+  const TabNavigator = () => {
+    return (
       <Tab.Navigator
         screenOptions={{
           tabBarActiveTintColor: Colors.thirdColor,
@@ -140,8 +157,8 @@ export default function App() {
         }}
       >
         <Tab.Screen
-          name="Home"
-          component={MealNavigator}
+          name="Meals"
+          component={MealStackNavigator}
           options={{
             headerShown: false,
 
@@ -158,8 +175,8 @@ export default function App() {
           }}
         />
         <Tab.Screen
-          name="Favorite"
-          component={FavNavigator}
+          name="Favoritee"
+          component={FavStackNavigator}
           options={{
             headerShown: false,
             tabBarIcon: (tabInfo) => {
@@ -174,6 +191,41 @@ export default function App() {
           }}
         />
       </Tab.Navigator>
+    );
+  };
+
+  const Draw = createDrawerNavigator();
+
+  const DrawNavigator = ({ navigation }) => {
+    return (
+      <Draw.Navigator
+        initialRouteName="Home"
+        screenOptions={{
+          headerShown: false,
+          drawerActiveTintColor: Colors.thirdColor,
+          drawerActiveBackgroundColor: Colors.primaryColor,
+          drawerLabelStyle: {
+            fontFamily: "open-sans-bold",
+            marginLeft: 10,
+          },
+          drawerStyle: {
+            borderRadius: 15,
+            width: "50%",
+          },
+          drawerItemStyle: {
+            borderRadius: 15,
+          },
+        }}
+      >
+        <Draw.Screen name="Home" component={TabNavigator} />
+        <Draw.Screen name="Filter" component={FilterStackNavigator} />
+      </Draw.Navigator>
+    );
+  };
+
+  return (
+    <NavigationContainer>
+      <DrawNavigator />
     </NavigationContainer>
   );
 }

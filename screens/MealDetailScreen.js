@@ -12,7 +12,6 @@ const MealDetailScreen = ({ props, route }) => {
 
   useEffect(() => {
     navigation.setOptions({
-      title: mealItem.title,
       headerTitle: () => <HeaderTitleCpn title={mealItem.title} />,
     });
   }, []);
