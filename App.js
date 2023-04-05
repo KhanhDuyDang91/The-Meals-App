@@ -8,6 +8,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { enableScreens } from "react-native-screens";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 
 import CategoriesScreen from "./screens/CategoriesScreen";
 import CategoryMealsScreen from "./screens/CategoryMealsScreen";
@@ -15,6 +16,7 @@ import MealDetailScreen from "./screens/MealDetailScreen";
 import FavoritesScreens from "./screens/FavoritesScreen";
 import Colors from "./constants/Colors";
 import HeaderTitleCpn from "./components/HeaderTitle";
+import FiltersScreen from "./screens/FiltersScreen";
 
 enableScreens();
 SplashScreen.preventAutoHideAsync();
@@ -39,6 +41,38 @@ export default function App() {
   } else {
     SplashScreen.hideAsync();
   }
+
+  const Draw = createDrawerNavigator();
+
+  const DrawNavigator = () => {
+    return (
+      <Draw.Navigator>
+        <Draw.Screen name="Filter" component={FilterNavigator} />
+        <Draw.Screen name="Favorite" component={FavNavigator} />
+      </Draw.Navigator>
+    );
+  };
+
+  const FilterNavigator = () => {
+    return (
+      <Stack.Navigator
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: Colors.thirdColor,
+          },
+          headerTintColor: Colors.textColor,
+          headerTitleAlign: "center",
+          headerTitleStyle: {
+            fontFamily: "open-sans-bold",
+          },
+          headerTitle: "Your Favorite Meals",
+        }}
+      >
+        <Stack.Screen name="Filter" component={FiltersScreen} />
+        <Stack.Screen name="MealDetails" component={MealDetailScreen} />
+      </Stack.Navigator>
+    );
+  };
 
   const Tab = createBottomTabNavigator();
 
