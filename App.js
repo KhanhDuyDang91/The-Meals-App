@@ -7,10 +7,13 @@ import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { enableScreens } from "react-native-screens";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import {
+  Ionicons,
+  MaterialCommunityIcons,
+  MaterialIcons,
+} from "@expo/vector-icons";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
-import { DrawerActions } from "@react-navigation/native";
 
 import CategoriesScreen from "./screens/CategoriesScreen";
 import CategoryMealsScreen from "./screens/CategoryMealsScreen";
@@ -164,14 +167,15 @@ export default function App() {
 
             tabBarIcon: (tabInfo) => {
               return (
-                <MaterialCommunityIcons
-                  name="home"
+                <MaterialIcons
+                  name="restaurant-menu"
                   size={25}
                   color={Colors.thirdColor}
                 />
               );
             },
             tabBarBadge: "hihi",
+            tabBarBadgeStyle: { fontSize: 10 },
           }}
         />
         <Tab.Screen
@@ -188,6 +192,7 @@ export default function App() {
                 />
               );
             },
+            tabBarLabel: "Favortites",
           }}
         />
       </Tab.Navigator>
