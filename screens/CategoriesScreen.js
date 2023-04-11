@@ -14,9 +14,6 @@ import CategoryGridTile from "../components/CategoryGridTile";
 
 const CategoriesScreen = (props) => {
   const renderGridItem = (itemData) => {
-    /* {
-      console.log(typeof itemData);
-    } */
     return (
       <CategoryGridTile
         onSelect={() => {
