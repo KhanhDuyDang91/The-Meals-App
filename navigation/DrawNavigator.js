@@ -1,4 +1,9 @@
 import { createDrawerNavigator } from "@react-navigation/drawer";
+import {
+  Ionicons,
+  MaterialCommunityIcons,
+  MaterialIcons,
+} from "@expo/vector-icons";
 
 import Colors from "../constants/Colors";
 import TabNavigator from "./TabNavigator";
@@ -16,7 +21,7 @@ const DrawNavigator = ({ navigation }) => {
         drawerActiveBackgroundColor: Colors.primaryColor,
         drawerLabelStyle: {
           fontFamily: "open-sans-bold",
-          marginLeft: 10,
+          marginLeft: 0,
         },
         drawerStyle: {
           borderRadius: 15,
@@ -27,8 +32,38 @@ const DrawNavigator = ({ navigation }) => {
         },
       }}
     >
-      <Draw.Screen name="Home" component={TabNavigator} />
-      <Draw.Screen name="Filter" component={FilterStackNavigator} />
+      <Draw.Screen
+        name="Home"
+        component={TabNavigator}
+        options={{
+          drawerIcon: () => {
+            return (
+              <Ionicons
+                name="home"
+                size={25}
+                color={Colors.thirdColor}
+                style={{ marginRight: -20 }}
+              />
+            );
+          },
+        }}
+      />
+      <Draw.Screen
+        name="Filter"
+        component={FilterStackNavigator}
+        options={{
+          drawerIcon: () => {
+            return (
+              <MaterialCommunityIcons
+                name="filter"
+                size={25}
+                color={Colors.thirdColor}
+                style={{ marginRight: -20 }}
+              />
+            );
+          },
+        }}
+      />
     </Draw.Navigator>
   );
 };
