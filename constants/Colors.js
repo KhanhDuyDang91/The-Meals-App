@@ -3,4 +3,5 @@ export default {
   accentColor: "#ffd966",
   thirdColor: "#dfa67b",
   textColor: "#3a3b3c",
+  forthColor: "#89df7b",
 };
