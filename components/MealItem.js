@@ -59,7 +59,6 @@ const styles = StyleSheet.create({
   mealDetail: {
     paddingHorizontal: 20,
     justifyContent: "space-between",
-
     alignItems: "center",
   },
   bgImage: {
