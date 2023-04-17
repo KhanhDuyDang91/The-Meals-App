@@ -1,6 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  useLayoutEffect,
+} from "react";
 import { StyleSheet, View, Text, Switch } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useNavigationState } from "@react-navigation/native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import HeaderButton from "../components/HeaderButton";
 
@@ -21,7 +26,7 @@ const FilterSwitch = (props) => {
   );
 };
 
-const FiltersScreen = (props) => {
+const FiltersScreen = ({ props, route }) => {
   const [isGlutenFree, setIsGlutenFree] = useState(false);
   const [isLactoseFree, setIsLactoseFree] = useState(false);
   const [isVegan, setIsVegan] = useState(false);
@@ -29,7 +34,7 @@ const FiltersScreen = (props) => {
 
   const navigation = useNavigation();
 
-  const saveFilters = () => {
+  const saveFilters = useCallback(() => {
     const appliedFilters = {
       glutenFree: isGlutenFree,
       lactoseFree: isLactoseFree,
@@ -38,9 +43,12 @@ const FiltersScreen = (props) => {
     };
 
     console.log(appliedFilters);
-  };
+  }, [isGlutenFree, isLactoseFree, isVegan, isVegetarian]);
 
-  useEffect(() => {});
+  //render the first and whenever saveFilters changes
+  useEffect(() => {
+    navigation.setParams({ save: saveFilters });
+  }, [saveFilters]);
 
   return (
     <View style={styles.screen}>
@@ -65,6 +73,13 @@ const FiltersScreen = (props) => {
         state={isVegetarian}
         onChange={(newValue) => setIsVegetarian(newValue)}
       />
+      <HeaderButtons HeaderButtonComponent={HeaderButton}>
+        <Item
+          title="Save"
+          iconName="check-circle-outline"
+          onPress={saveFilters}
+        />
+      </HeaderButtons>
     </View>
   );
 };

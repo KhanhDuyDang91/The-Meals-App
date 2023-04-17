@@ -78,8 +78,8 @@ const FavStackNavigator = () => {
   );
 };
 
-const FilterStackNavigator = () => {
-  const props = useNavigation();
+const FilterStackNavigator = ({ route }) => {
+  const navigation = useNavigation();
 
   return (
     <Stack.Navigator
@@ -102,19 +102,6 @@ const FilterStackNavigator = () => {
           headerBackVisible: false,
           headerLeft: () => {
             return <MenuBtn />;
-          },
-          headerRight: () => {
-            return (
-              <HeaderButtons HeaderButtonComponent={HeaderButton}>
-                <Item
-                  title="Save"
-                  iconName="check-circle-outline"
-                  onPress={() => {
-                    console.log("Saving");
-                  }}
-                />
-              </HeaderButtons>
-            );
           },
         }}
       />
