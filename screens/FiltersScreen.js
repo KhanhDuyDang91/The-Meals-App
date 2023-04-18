@@ -34,6 +34,20 @@ const FiltersScreen = ({ props, route }) => {
 
   const navigation = useNavigation();
 
+  navigation.setOptions({
+    headerRight: () => {
+      return (
+        <HeaderButtons HeaderButtonComponent={HeaderButton}>
+          <Item
+            title="Save"
+            iconName="check-circle-outline"
+            onPress={saveFilters}
+          />
+        </HeaderButtons>
+      );
+    },
+  });
+
   const saveFilters = useCallback(() => {
     const appliedFilters = {
       glutenFree: isGlutenFree,
@@ -46,7 +60,7 @@ const FiltersScreen = ({ props, route }) => {
   }, [isGlutenFree, isLactoseFree, isVegan, isVegetarian]);
 
   //render the first and whenever saveFilters changes
-  useEffect(() => {
+  useLayoutEffect(() => {
     navigation.setParams({ save: saveFilters });
   }, [saveFilters]);
 
@@ -73,13 +87,6 @@ const FiltersScreen = ({ props, route }) => {
         state={isVegetarian}
         onChange={(newValue) => setIsVegetarian(newValue)}
       />
-      <HeaderButtons HeaderButtonComponent={HeaderButton}>
-        <Item
-          title="Save"
-          iconName="check-circle-outline"
-          onPress={saveFilters}
-        />
-      </HeaderButtons>
     </View>
   );
 };
