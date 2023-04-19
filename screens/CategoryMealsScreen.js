@@ -1,8 +1,8 @@
 import { React, useEffect } from "react";
 
 import { useNavigation } from "@react-navigation/native";
+import { useSelector } from "react-redux";
 
-import { MEALS } from "../data/dummy-data";
 import MealList from "../components/MealList";
 
 const CategoryMealsScreen = ({ route, props }) => {
@@ -10,7 +10,9 @@ const CategoryMealsScreen = ({ route, props }) => {
 
   const catId = route.params;
 
-  const displayedMeals = MEALS.filter(
+  const availableMeals = useSelector((state) => state.meals.filteredMeals);
+
+  const displayedMeals = availableMeals.filter(
     (meal) => meal.categoryIds.indexOf(catId.categoryId.id) >= 0
   );
 
@@ -18,7 +20,7 @@ const CategoryMealsScreen = ({ route, props }) => {
     navigation.setOptions({
       title: catId.categoryId.title,
     });
-  }, []);
+  });
 
   return <MealList listData={displayedMeals} />;
 };

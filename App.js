@@ -7,12 +7,6 @@ import { enableScreens } from "react-native-screens";
 import store from "./store/store";
 import { Provider } from "react-redux";
 
-import {
-  MealStackNavigator,
-  FavStackNavigator,
-  FilterStackNavigator,
-} from "./navigation/StackNavigator";
-import TabNavigator from "./navigation/TabNavigator";
 import DrawNavigator from "./navigation/DrawNavigator";
 
 enableScreens();
