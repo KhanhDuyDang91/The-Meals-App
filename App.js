@@ -4,6 +4,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { enableScreens } from "react-native-screens";
+import store from "./store/store";
+import { Provider } from "react-redux";
 
 import {
   MealStackNavigator,
@@ -36,8 +38,10 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer>
-      <DrawNavigator />
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <DrawNavigator />
+      </NavigationContainer>
+    </Provider>
   );
 }
