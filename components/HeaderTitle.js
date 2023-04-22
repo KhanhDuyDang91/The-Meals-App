@@ -2,14 +2,18 @@ import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
 
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import HeaderButton from "../components/HeaderButton";
 import Colors from "../constants/Colors";
+import { addFavorite } from "../store/reducers/meals";
 
 const HeaderTitleCpn = (props) => {
   const [stateFav, setStateFav] = useState(false);
   const navigation = useNavigation();
+
+  const dispatch = useDispatch();
 
   return (
     <View style={styles.container}>
@@ -20,12 +24,7 @@ const HeaderTitleCpn = (props) => {
         <Item
           title="Favorite"
           iconName={stateFav === false ? "heart-plus-outline" : "heart-remove"}
-          onPress={() => {
-            setStateFav(!stateFav);
-            stateFav === false
-              ? alert("Added to favorite")
-              : alert("Removed favorite");
-          }}
+          onPress={() => {}}
           style={styles.headerBtn}
         />
       </HeaderButtons>
@@ -44,10 +43,6 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: "open-sans-bold",
-    fontSize: 20,
-    paddingHorizontal: 20,
-    textAlign: "center",
-    width: "60%",
   },
   headerBtn: {
     marginRight: 60,

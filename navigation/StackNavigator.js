@@ -18,32 +18,40 @@ const Stack = createNativeStackNavigator();
 const MealStackNavigator = () => {
   const navigation = useNavigation();
   return (
-    <Stack.Navigator initialRouteName="Home">
-      <Stack.Group
-        screenOptions={{
-          headerStyle: {
-            backgroundColor: Colors.thirdColor,
+    <Stack.Navigator
+      initialRouteName="Home"
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: Colors.thirdColor,
+        },
+        headerTintColor: Colors.textColor,
+        headerTitleAlign: "center",
+        headerTitleStyle: {
+          fontFamily: "open-sans-bold",
+        },
+      }}
+    >
+      <Stack.Screen
+        name="Categories Meal"
+        component={CategoriesScreen}
+        options={{
+          headerBackVisible: false,
+          headerLeft: () => {
+            return <MenuBtn />;
           },
-          headerTintColor: Colors.textColor,
-          headerTitleAlign: "center",
+        }}
+      ></Stack.Screen>
+      <Stack.Screen name="Meal" component={CategoryMealsScreen} />
+      <Stack.Screen
+        name="MealDetails"
+        component={MealDetailScreen}
+        options={{
           headerTitleStyle: {
+            fontSize: 16,
             fontFamily: "open-sans-bold",
           },
         }}
-      >
-        <Stack.Screen
-          name="Categories Meal"
-          component={CategoriesScreen}
-          options={{
-            headerBackVisible: false,
-            headerLeft: () => {
-              return <MenuBtn />;
-            },
-          }}
-        ></Stack.Screen>
-        <Stack.Screen name="Meal" component={CategoryMealsScreen} />
-        <Stack.Screen name="MealDetails" component={MealDetailScreen} />
-      </Stack.Group>
+      />
     </Stack.Navigator>
   );
 };
@@ -56,7 +64,7 @@ const FavStackNavigator = () => {
           backgroundColor: Colors.thirdColor,
         },
         headerTintColor: Colors.textColor,
-        headerTitleAlign: "center",
+
         headerTitleStyle: {
           fontFamily: "open-sans-bold",
         },
