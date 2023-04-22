@@ -8,14 +8,13 @@ import {
   Ionicons,
 } from "@expo/vector-icons";
 import { useSelector, useDispatch } from "react-redux";
-import { Connect } from "react-redux";
 
-import HeaderTitleCpn from "../components/HeaderTitle";
 import DefaultText from "../components/DefaultText";
+import TitleText from "../components/TitleText";
 import Colors from "../constants/Colors";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import HeaderButton from "../components/HeaderButton";
-import { toggleFavoriteeee } from "../store/reducers/meals";
+import { toggleFavorite } from "../store/reducers/meals";
 
 const ListDetail = (props) => {
   return (
@@ -31,13 +30,14 @@ const MealDetailScreen = ({ props, route }) => {
   const mealParam = route.params;
   const mealItem = mealParam.mealItem;
   const mealId = mealParam.mealId;
+  const isFavorite = mealParam.isFav;
 
   const selectedMeal = availableMeals.find((meal) => meal.id === mealItem.id);
 
   const dispatch = useDispatch();
 
   const toggleFavoriteHandler = useCallback(() => {
-    dispatch(toggleFavoriteeee(mealId));
+    dispatch(toggleFavorite(mealId));
   }, [dispatch, mealId]);
 
   /* useEffect(() => {
@@ -46,15 +46,25 @@ const MealDetailScreen = ({ props, route }) => {
 
   /* const toggleFavoritee = mealParam.toggleFav; */
 
+  const currentMealIsFavorite = useSelector((state) =>
+    state.meals.favoriteMeals.some((meal) => meal.id === mealId)
+  );
+
+  useEffect(() => {
+    navigation.setParams({ isFav: currentMealIsFavorite });
+  }, [currentMealIsFavorite]);
+
   useEffect(() => {
     navigation.setOptions({
-      headerTitle: selectedMeal.title,
+      headerTitle: () => {
+        return <TitleText numberOfLines={1}>{selectedMeal.title}</TitleText>;
+      },
       headerRight: () => {
         return (
           <HeaderButtons HeaderButtonComponent={HeaderButton}>
             <Item
               title="Favorite"
-              iconName="heart-plus-outline"
+              iconName={isFavorite ? "heart-remove" : "heart-plus-outline"}
               onPress={toggleFavoriteHandler}
               style={styles.headerBtn}
             />
@@ -134,11 +144,9 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   headerBtn: {
-    marginRight: 0,
-    height: "80%",
+    marginRight: -15,
+    height: "100%",
     alignItems: "center",
-    backgroundColor: Colors.primaryColor,
-    borderRadius: 25,
   },
 });
 

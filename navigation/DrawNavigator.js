@@ -17,7 +17,7 @@ const DrawNavigator = ({ navigation }) => {
       initialRouteName="Home"
       screenOptions={{
         headerShown: false,
-        drawerActiveTintColor: Colors.thirdColor,
+        drawerActiveTintColor: Colors.fifthColor,
         drawerActiveBackgroundColor: Colors.primaryColor,
         drawerLabelStyle: {
           fontFamily: "open-sans-bold",

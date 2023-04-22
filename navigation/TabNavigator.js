@@ -3,10 +3,13 @@ import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
 
 import Colors from "../constants/Colors";
 import { MealStackNavigator, FavStackNavigator } from "./StackNavigator";
+import { useSelector } from "react-redux";
 
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
+  const FavoriteMeals = useSelector((state) => state.meals.favoriteMeals);
+
   return (
     <Tab.Navigator
       screenOptions={{
@@ -34,8 +37,6 @@ const TabNavigator = () => {
               />
             );
           },
-          tabBarBadge: "hihi",
-          tabBarBadgeStyle: { fontSize: 10 },
         }}
       />
       <Tab.Screen
@@ -52,7 +53,12 @@ const TabNavigator = () => {
               />
             );
           },
-          tabBarLabel: "Favortites",
+          tabBarLabel: "Favorite",
+          tabBarBadge: FavoriteMeals.length,
+          tabBarBadgeStyle: {
+            fontSize: 10,
+            backgroundColor: Colors.fifthColor,
+          },
         }}
       />
     </Tab.Navigator>

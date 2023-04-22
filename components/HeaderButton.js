@@ -15,7 +15,7 @@ const CustomHeaderButton = (props) => {
       {...props}
       IconComponent={MaterialCommunityIcons}
       iconSize={30}
-      color={Platform.OS === "ios" ? Colors.primaryColor : Colors.forthColor}
+      color={Platform.OS === "ios" ? Colors.primaryColor : Colors.fifthColor}
       style={{ ...props.style, ...styles.headerButton }}
       buttonStyle={{ paddingBottom: 5 }}
     />

@@ -12,10 +12,9 @@ const TitleText = (props) => {
 const styles = StyleSheet.create({
   text: {
     fontFamily: "open-sans-bold",
-    fontSize: 20,
+    fontSize: 18,
     width: "90%",
-    backgroundColor: "red",
-    marginLeft: -30,
+    marginLeft: -50,
     textAlign: "center",
   },
 });

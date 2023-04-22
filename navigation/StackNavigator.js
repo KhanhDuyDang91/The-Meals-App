@@ -64,7 +64,7 @@ const FavStackNavigator = () => {
           backgroundColor: Colors.thirdColor,
         },
         headerTintColor: Colors.textColor,
-
+        headerTitleAlign: "center",
         headerTitleStyle: {
           fontFamily: "open-sans-bold",
         },
@@ -81,7 +81,16 @@ const FavStackNavigator = () => {
           },
         }}
       />
-      <Stack.Screen name="MealDetails" component={MealDetailScreen} />
+      <Stack.Screen
+        name="MealDetails"
+        component={MealDetailScreen}
+        options={{
+          headerTitleStyle: {
+            fontSize: 16,
+            fontFamily: "open-sans-bold",
+          },
+        }}
+      />
     </Stack.Navigator>
   );
 };
