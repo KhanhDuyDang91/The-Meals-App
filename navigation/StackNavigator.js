@@ -12,6 +12,7 @@ import FavoritesScreens from "../screens/FavoritesScreen";
 import FiltersScreen from "../screens/FiltersScreen";
 import MenuBtn from "../components/MenuBtn";
 import { Ionicons } from "@expo/vector-icons";
+import FilterCategoryScreen from "../screens/FilterCategoryScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -109,7 +110,6 @@ const FilterStackNavigator = ({ route }) => {
         headerTitleStyle: {
           fontFamily: "open-sans-bold",
         },
-        headerTitle: "Your Filter",
       }}
     >
       <Stack.Screen
@@ -120,8 +120,10 @@ const FilterStackNavigator = ({ route }) => {
           headerLeft: () => {
             return <MenuBtn />;
           },
+          headerTitle: "Filter Screen",
         }}
       />
+      <Stack.Screen name="Filtered Meals" component={FilterCategoryScreen} />
       <Stack.Screen name="MealDetails" component={MealDetailScreen} />
     </Stack.Navigator>
   );

@@ -1,17 +1,21 @@
-import React from "react";
-import { FlatList, StyleSheet, View } from "react-native";
+import { React, useEffect } from "react";
+
 import { useNavigation } from "@react-navigation/native";
 import { useSelector } from "react-redux";
+import { mealSlice } from "../store/reducers/meals";
+import { MEALS } from "../data/dummy-data";
+import { View, StyleSheet, FlatList } from "react-native";
 
-import MealItem from "./MealItem";
+import MealList from "../components/MealList";
+import MealItem from "../components/MealItem";
 
-const MealList = (props) => {
+const FilterCategoryScreen = ({ route, props }) => {
   const navigation = useNavigation();
 
-  const favoriteMeals = useSelector((state) => state.meals.favoriteMeals);
+  const availableMeals = useSelector((state) => state.meals.filteredMeals);
 
   const renderMealItem = (itemData) => {
-    const isFavorite = favoriteMeals.some(
+    const isFavorite = availableMeals.some(
       (meal) => meal.id === itemData.item.id
     );
     return (
@@ -36,7 +40,7 @@ const MealList = (props) => {
   return (
     <View style={styles.list}>
       <FlatList
-        data={props.listData}
+        data={availableMeals}
         keyExtractor={(item, index) => item.id}
         renderItem={renderMealItem}
         style={{ width: "100%" }}
@@ -54,4 +58,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MealList;
+export default FilterCategoryScreen;

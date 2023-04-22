@@ -6,15 +6,19 @@ import {
   TouchableOpacity,
   ImageBackground,
   TouchableNativeFeedback,
+  Platform,
 } from "react-native";
 
 import Colors from "../constants/Colors";
 import DefaultText from "./DefaultText";
 
 const MealItem = (props) => {
+  const Touchable = () => {
+    Platform.OS === "ios" ? TouchableOpacity : TouchableNativeFeedback;
+  };
   return (
     <View style={styles.mealItem}>
-      <TouchableOpacity onPress={props.onSelect}>
+      <TouchableNativeFeedback onPress={props.onSelect}>
         <View>
           <View style={{ ...styles.mealRow, ...styles.mealHeader }}>
             <ImageBackground
@@ -34,7 +38,7 @@ const MealItem = (props) => {
             <DefaultText>{props.affordability.toUpperCase()}</DefaultText>
           </View>
         </View>
-      </TouchableOpacity>
+      </TouchableNativeFeedback>
     </View>
   );
 };

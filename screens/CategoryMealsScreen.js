@@ -10,11 +10,13 @@ const CategoryMealsScreen = ({ route, props }) => {
 
   const catId = route.params;
 
-  const availableMeals = useSelector((state) => state.meals.filteredMeals);
+  const availableMeals = useSelector((state) => state.meals.meals);
 
   const displayedMeals = availableMeals.filter(
     (meal) => meal.categoryIds.indexOf(catId.categoryId.id) >= 0
   );
+
+  console.log(displayedMeals);
 
   useEffect(() => {
     navigation.setOptions({

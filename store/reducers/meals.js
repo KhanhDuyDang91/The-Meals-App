@@ -25,9 +25,28 @@ export const mealSlice = createSlice({
         return { ...state, favoriteMeals: state.favoriteMeals.concat(meal) };
       }
     },
+    setFilter: (state, action) => {
+      const appliedFilter = action.payload;
+      const updatedFilteredMeals = state.meals.filter((meal) => {
+        if (appliedFilter.glutenFree && !meal.isGlutenFree) {
+          return false;
+        }
+        if (appliedFilter.lactoseFree && !meal.isLactoseFree) {
+          return false;
+        }
+        if (appliedFilter.vegetarian && !meal.isVegatarian) {
+          return false;
+        }
+        if (appliedFilter.vegan && !meal.isVegan) {
+          return false;
+        }
+        return true;
+      });
+      return { ...state, filteredMeals: updatedFilteredMeals };
+    },
   },
 });
 
-export const { toggleFavorite } = mealSlice.actions;
+export const { toggleFavorite, setFilter } = mealSlice.actions;
 
 export default mealSlice.reducer;

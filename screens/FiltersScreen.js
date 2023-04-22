@@ -8,9 +8,12 @@ import { StyleSheet, View, Text, Switch } from "react-native";
 import { useNavigation, useNavigationState } from "@react-navigation/native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import HeaderButton from "../components/HeaderButton";
+import { useDispatch } from "react-redux";
 
 import DefaultText from "../components/DefaultText";
 import Colors from "../constants/Colors";
+import { setFilter } from "../store/reducers/meals";
+import DefaultButton from "../components/DefaultButton";
 
 const FilterSwitch = (props) => {
   return (
@@ -19,7 +22,7 @@ const FilterSwitch = (props) => {
       <Switch
         value={props.state}
         onValueChange={props.onChange}
-        trackColor={{ true: Colors.forthColor }}
+        trackColor={{ true: Colors.fifthColor }}
         thumbColor={Colors.thirdColor}
       />
     </View>
@@ -33,20 +36,7 @@ const FiltersScreen = ({ props, route }) => {
   const [isVegetarian, setIsVegetarian] = useState(false);
 
   const navigation = useNavigation();
-
-  navigation.setOptions({
-    headerRight: () => {
-      return (
-        <HeaderButtons HeaderButtonComponent={HeaderButton}>
-          <Item
-            title="Save"
-            iconName="check-circle-outline"
-            onPress={saveFilters}
-          />
-        </HeaderButtons>
-      );
-    },
-  });
+  const dispatch = useDispatch();
 
   const saveFilters = useCallback(() => {
     const appliedFilters = {
@@ -55,14 +45,21 @@ const FiltersScreen = ({ props, route }) => {
       vegan: isVegan,
       vegetarian: isVegetarian,
     };
-
-    console.log(appliedFilters);
-  }, [isGlutenFree, isLactoseFree, isVegan, isVegetarian]);
+    dispatch(setFilter(appliedFilters));
+    navigation.navigate("Filtered Meals");
+  }, [
+    isGlutenFree,
+    isLactoseFree,
+    isVegan,
+    isVegetarian,
+    dispatch,
+    navigation,
+  ]);
 
   //render the first and whenever saveFilters changes
-  useLayoutEffect(() => {
+  /* useLayoutEffect(() => {
     navigation.setParams({ save: saveFilters });
-  }, [saveFilters]);
+  }, [saveFilters]); */
 
   return (
     <View style={styles.screen}>
@@ -87,6 +84,19 @@ const FiltersScreen = ({ props, route }) => {
         state={isVegetarian}
         onChange={(newValue) => setIsVegetarian(newValue)}
       />
+      <View style={styles.buttonContainer}>
+        <DefaultButton
+          onPress={() => {
+            setIsGlutenFree(false);
+            setIsLactoseFree(false);
+            setIsVegan(false);
+            setIsVegetarian(false);
+          }}
+        >
+          Reset
+        </DefaultButton>
+        <DefaultButton onPress={saveFilters}>Apply</DefaultButton>
+      </View>
     </View>
   );
 };
@@ -111,6 +121,13 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 18,
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    width: "100%",
+
+    marginTop: 20,
   },
 });
 
