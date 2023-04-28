@@ -1,13 +1,11 @@
 import { React, useEffect } from "react";
-
 import { useNavigation } from "@react-navigation/native";
 import { useSelector } from "react-redux";
-import { mealSlice } from "../store/reducers/meals";
-import { MEALS } from "../data/dummy-data";
 import { View, StyleSheet, FlatList } from "react-native";
 
 import MealList from "../components/MealList";
 import MealItem from "../components/MealItem";
+import { mealSlice } from "../store/mealSlice";
 
 const FilterCategoryScreen = ({ route, props }) => {
   const navigation = useNavigation();

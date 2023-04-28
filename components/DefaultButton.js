@@ -16,20 +16,41 @@ const DefaultButton = (props) => {
     ButtonComponent = TouchableNativeFeedback;
   }
 
-  return (
-    <View style={styles.buttonContainer}>
-      <ButtonComponent activeOpacity={0.8} onPress={props.onPress}>
-        <View style={styles.button}>
-          <Text style={styles.textButton}>{props.children}</Text>
-        </View>
-      </ButtonComponent>
-    </View>
-  );
+  if (props.nameBtn === "PRIMARY")
+    return (
+      <View style={styles.buttonContainer}>
+        <ButtonComponent activeOpacity={0.8} onPress={props.onPress}>
+          <View style={styles.defaultBtn}>
+            <Text style={styles.textButton}>{props.children}</Text>
+          </View>
+        </ButtonComponent>
+      </View>
+    );
+  else if (props.nameBtn === "SECONDARY")
+    return (
+      <View style={styles.buttonContainer}>
+        <ButtonComponent activeOpacity={0.8} onPress={props.onPress}>
+          <View style={styles.secondaryBtn}>
+            <Text style={styles.textButtonn}>{props.children}</Text>
+          </View>
+        </ButtonComponent>
+      </View>
+    );
 };
 
 const styles = StyleSheet.create({
-  button: {
+  defaultBtn: {
     backgroundColor: Colors.fifthColor,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 10,
+    marginHorizontal: 10,
+    width: 100,
+    height: 50,
+    elevation: 3,
+  },
+  secondaryBtn: {
+    backgroundColor: Colors.forthColor,
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 10,
@@ -44,6 +65,11 @@ const styles = StyleSheet.create({
   },
   textButton: {
     color: "white",
+    fontFamily: "open-sans",
+    fontSize: 18,
+  },
+  textButtonn: {
+    color: Colors.textColor,
     fontFamily: "open-sans",
     fontSize: 18,
   },

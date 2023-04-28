@@ -1,4 +1,4 @@
-import { MEALS } from "../../data/dummy-data";
+import { MEALS } from "../data/dummy-data";
 import { createSlice } from "@reduxjs/toolkit";
 
 export const mealSlice = createSlice({

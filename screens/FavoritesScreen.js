@@ -1,10 +1,10 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import MealList from "../components/MealList";
-import { mealSlice } from "../store/reducers/meals";
-import { MEALS } from "../data/dummy-data";
 import { View, StyleSheet } from "react-native";
+
 import TitleText from "../components/TitleText";
+import MealList from "../components/MealList";
+import { mealSlice } from "../store/mealSlice";
 
 const FavoritesScreens = (props) => {
   const availableMeals = useSelector((state) => state.meals.favoriteMeals);

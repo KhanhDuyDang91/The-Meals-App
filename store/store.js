@@ -1,5 +1,5 @@
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
-import mealReducer from "./reducers/meals";
+import mealReducer from "./mealSlice";
 import logger from "redux-logger";
 
 export default configureStore({

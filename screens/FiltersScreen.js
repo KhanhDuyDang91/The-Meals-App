@@ -1,18 +1,13 @@
-import React, {
-  useState,
-  useEffect,
-  useCallback,
-  useLayoutEffect,
-} from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { StyleSheet, View, Text, Switch } from "react-native";
-import { useNavigation, useNavigationState } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import HeaderButton from "../components/HeaderButton";
 import { useDispatch } from "react-redux";
 
 import DefaultText from "../components/DefaultText";
 import Colors from "../constants/Colors";
-import { setFilter } from "../store/reducers/meals";
+import { setFilter } from "../store/mealSlice";
 import DefaultButton from "../components/DefaultButton";
 
 const FilterSwitch = (props) => {
@@ -56,11 +51,6 @@ const FiltersScreen = ({ props, route }) => {
     navigation,
   ]);
 
-  //render the first and whenever saveFilters changes
-  /* useLayoutEffect(() => {
-    navigation.setParams({ save: saveFilters });
-  }, [saveFilters]); */
-
   return (
     <View style={styles.screen}>
       <Text style={styles.title}>Available Filter / Restrictions</Text>
@@ -92,10 +82,13 @@ const FiltersScreen = ({ props, route }) => {
             setIsVegan(false);
             setIsVegetarian(false);
           }}
+          nameBtn="SECONDARY"
         >
           Reset
         </DefaultButton>
-        <DefaultButton onPress={saveFilters}>Apply</DefaultButton>
+        <DefaultButton onPress={saveFilters} nameBtn="PRIMARY">
+          Apply
+        </DefaultButton>
       </View>
     </View>
   );

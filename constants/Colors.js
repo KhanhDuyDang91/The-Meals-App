@@ -3,6 +3,6 @@ export default {
   accentColor: "#ffd966",
   thirdColor: "#e6ba98",
   textColor: "#3a3b3c",
-  forthColor: "#89df7b",
+  forthColor: "#ecb2b6",
   fifthColor: "#DF7B82",
 };

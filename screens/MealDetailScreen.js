@@ -14,7 +14,7 @@ import TitleText from "../components/TitleText";
 import Colors from "../constants/Colors";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import HeaderButton from "../components/HeaderButton";
-import { toggleFavorite } from "../store/reducers/meals";
+import { toggleFavorite } from "../store/mealSlice";
 
 const ListDetail = (props) => {
   return (
@@ -75,7 +75,7 @@ const MealDetailScreen = ({ props, route }) => {
   });
 
   return (
-    <ScrollView>
+    <ScrollView style={styles.main}>
       <Image source={{ uri: selectedMeal.imageUrl }} style={styles.image} />
       <View style={styles.details}>
         <View style={styles.label}>
@@ -112,6 +112,13 @@ const MealDetailScreen = ({ props, route }) => {
 };
 
 const styles = StyleSheet.create({
+  main: {
+    backgroundColor: "white",
+    paddingBottom: 50,
+  },
+  container: {
+    marginBottom: 10,
+  },
   image: {
     width: "100%",
     height: 200,
